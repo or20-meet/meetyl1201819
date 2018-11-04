@@ -6,6 +6,6 @@ while True:
 	turtle.right(90)
 	turtle.forward(50)
 	turtle.goto(0,0)
-	turtle.right(10)
+	turtle.right(1)
 
 turtle.mainloop()
