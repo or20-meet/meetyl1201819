@@ -89,24 +89,24 @@ exam_1 = int(simpledialog.askstring("Input", "Input exam grade one: ", parent=tk
 
 exam_2 = int(simpledialog.askstring("Input", "Input exam grade two: ", parent=tk.Tk().withdraw()))
 
-exam_3 = int(simpledialog.askstring("Input", "Input exam grade three: "), parent=tk.Tk().withdraw())
+exam_3 = int(simpledialog.askstring("Input", "Input exam grade three: ", parent=tk.Tk().withdraw()))
 
-grades = [exam_1 exam_2 exam_three]
+grades = [exam_1, exam_2, exam_3]
 sum = 0
-for grade in grade:
+for grade in grades:
   sum = sum + grade
 
-avg = sum / len(grdes)
+avg = sum / len(grades)
 
 if avg >= 90:
     letter_grade = "A"
-elif avg >= 80 and avg < 90
+elif avg >= 80 and avg < 90:
     letter_grade = "B"
 elif avg > 69 and avg < 80:
-    letter_grade = "C'
+    letter_grade = "C"
 elif avg <= 69 and avg >= 65:
     letter_grade = "D"
-elif:
+else:
     letter_grade = "F"
 
 for grade in grades:
@@ -116,9 +116,9 @@ for grade in grades:
 
     print("Grade: " + letter_grade)
 
-if letter-grade is "F":
-    print "Student is failing."
+if letter_grade == "F":
+    print( "Student is failing.")
 else:
-    print "Student is passing."
+    print ("Student is passing.")
 
 
