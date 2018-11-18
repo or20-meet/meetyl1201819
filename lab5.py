@@ -62,6 +62,8 @@ you.speak()
 
 
 
+
+'''
 import tkinter as tk
 from tkinter import simpledialog
 # Calculating Grades (ok, let me think about this one)
@@ -103,7 +105,7 @@ if avg >= 90:
 elif avg >= 80 and avg < 90:
     letter_grade = "B"
 elif avg > 69 and avg < 80:
-    letter_grade = "C"
+    letter_grade = "C"1
 elif avg <= 69 and avg >= 65:
     letter_grade = "D"
 else:
@@ -120,5 +122,84 @@ if letter_grade == "F":
     print( "Student is failing.")
 else:
     print ("Student is passing.")
+'''
 
 
+'''
+class Person(object):
+   def __init__(self, name, favorite_food ,age,color):
+       self.name = name
+       self.favorite_food = favorite_food
+       self.age = age
+       self.color=color
+
+
+   def define_color(self, color):
+       self.color = color
+
+   def print_info(self):
+       print("My name is " + self.name + ", I'm " + str(self.age) + " years old.")
+       print("My favorite food is " + self.favorite_food + " and my favorite color is " + self.color)
+
+
+a = Person("Britney", "Pizza", 16, "Black")
+a.define_color("Black")
+a.print_info()
+
+b = Person("Jake", "pizza", 15, "Black")
+b.print_info()
+'''
+
+'''
+class Bear(object):
+    def __init__(self, name):
+    	self.name=name
+    	print("A new bear created. Its name is: " + self.name)
+    
+    def say_hi(self):
+        print("Hi! I’m a bear. My name is " + self.name)
+my_bear = Bear("Danny")
+my_bear.say_hi()
+'''
+
+
+'''
+balloons = 5
+name = "Ron"
+color = "Yellow"
+print("This is a tale about " + str(balloons) +  "balloons. The first kid is "  + str(name) + " who got a " + str(color)+ "baloon")
+'''
+
+
+'''
+class Cake(object):
+	def __init__(self,flavor):
+		self.cake_flavor = flavor
+
+	def eat(self):
+		print("Yummy!!! Eating a "+ self.cake_flavor+ " cake :")
+
+cake = Cake("chocolate")
+cake.eat()
+# what I want to be printed: Yummy!!! Eating a chocolate cake :)
+'''
+
+
+
+class Cat(object):
+	def __init__(self,name,age):
+		self.name = name
+		self.age = age
+	def birthday(self):
+		self.age += 1
+		if self.age >= 100:
+			print("Dong dong, the cat is dead!")
+		else:
+			print(self.name, "having its", str(self.age), "birthday!")
+
+
+my_cat = Cat("Salem", 7)
+
+my_cat.birthday()
+# what I want: my cat to celebrate its 8th birthday (and all the 
+# birthdays that come before that)
