@@ -23,14 +23,15 @@ turtle.mainloop()
 
 
 
-
+'''
 from turtle import Turtle
 import turtle
 
 class Hexagon(Turtle): 
-	def __init__(self, size):
+	def __init__(self, size, hcolor):
 		Turtle.__init__(self)
 		self.size=size
+		self.hcolor=hcolor
 		turtle.penup()
 
 		
@@ -44,12 +45,13 @@ class Hexagon(Turtle):
 		turtle.register_shape("hexagon", s)
 		self.shape("hexagon")
 		self.shapesize(self.size)
+		self.color(self.hcolor)
 
 
-t1= Hexagon(2)
+t1= Hexagon(2, "green")
 
 turtle.mainloop()
-
+'''
 
 
 
