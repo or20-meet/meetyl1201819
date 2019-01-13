@@ -4,11 +4,11 @@ from turtle import *
 class Ball(Turtle):
 	def __init__(self, x, y, dx, dy, r, color):
 		Turtle.__init__(self)
+		self.penup()
 		self.goto(x,y)
 		self.shape("circle")
 		self.shapesize(r/10)
 		self.color(color)
-		self.penup()
 		self.dx=dx
 		self.dy=dy
 		self.r=r
