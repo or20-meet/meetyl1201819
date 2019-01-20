@@ -95,11 +95,10 @@ def check_my_collision():
 
 def movearound(event):
 	x= event.x-screen_width
-	y= screen.height-event.y
-	my_ball.goto(event.x, event.y)
+	y= screen_height-event.y
+	my_ball.goto(x, y)
 
 
-turtle.getcanvas().bind("<motion>",movearound)
+turtle.getcanvas().bind("<Motion>",movearound)
 turtle.listen()
-movearound()
 turtle.mainloop()
