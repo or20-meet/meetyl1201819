@@ -8,7 +8,6 @@ from ball import Ball
 '''
 erors:
 variables won't globalize
-my_ball size won't increase
 
 '''
 
@@ -28,7 +27,7 @@ screen_width= int(turtle.getcanvas().winfo_width()/2)
 screen_height= int(turtle.getcanvas().winfo_height()/2)
 
 global level_up_score, score, level
-level_up_score=-1
+level_up_score=0
 score=0
 level=0
 
@@ -48,7 +47,7 @@ balls=[]
 my_ball= Ball(0, 0, 2, 2, 30, "green")
 
 #the following function take a ball and randomizes it's of x, y, dx, dy, r  and color values
-def randomize(ball):
+def randomize(ball, maximum_ball_dx, maximum_ball_dy):
 	x= random.randint(maximum_ball_radius-screen_width, screen_width-maximum_ball_radius)
 	y=random.randint(maximum_ball_radius - screen_height, screen_height- maximum_ball_radius)
 	dx=0
@@ -68,8 +67,8 @@ def randomize(ball):
 
 #this function makes a random ball
 def random_ball():
-	x= random.randint(maximum_ball_radius-screen_width, screen_width-maximum_ball_radius)
-	y=random.randint(maximum_ball_radius - screen_height, screen_height- maximum_ball_radius)
+	x= random.randint(maximum_ball_radius*3.5-screen_width, screen_width-maximum_ball_radius*3.5)
+	y=random.randint(maximum_ball_radius*3.5 - screen_height, screen_height- maximum_ball_radius*3.5)
 	dx=0
 	while dx==0:
 		dx= random.randint(minimum_ball_dx  , maximum_ball_dx)
@@ -93,18 +92,18 @@ def collide(ball1, ball2):
 
 
 #this functions checks the collition of all the non- player balls on the screen
-def check_all_collision():
+def check_all_collision(maximum_ball_dx, maximum_ball_dy):
 	for ball1 in balls:
 		for ball2 in balls:
 			if collide(ball1, ball2):
 				rad1= ball1.r
 				rad2= ball2.r 
 				if rad1> rad2:
-					randomize(ball2)
+					randomize(ball2, maximum_ball_dx, maximum_ball_dy)
 					ball1.r+=1
 					ball1.shapesize(ball1.r/10)
 				elif rad2> rad1:
-					randomize(ball1)
+					randomize(ball1, maximum_ball_dx, maximum_ball_dy)
 					ball2.r+=1
 					ball2.shapesize(ball2.r/10)
 
@@ -112,17 +111,16 @@ def check_all_collision():
 #this function checks if the score is above a certain changing number and if it is changes the ranges of the randomized balls
 def level_up(level_up_score, level, score, maximum_ball_radius, maximum_ball_dy, maximum_ball_dx):
 	if score>=level_up_score:
-		maximum_ball_radius+=1
-		maximum_ball_dy+=1
-		maximum_ball_dx+=1
+		#maximum_ball_dy+=1
+		#maximum_ball_dx+=1
 		level+=1
 		level_up_score+=2*level
-		#turtle.write("level: "+ str(level))
-
+		turtle.write( "level: "+ str(level),font= ("Arial", 15, "bold") )
+		return maximum_ball_dx, maximum_ball_dy
 
 #this function checks if the player's ball is colliding with an other ball
 #if it does returns true and changes the players size , if it doesn't  returns false 
-def check_my_collision(level_up_score, level, score, maximum_ball_radius, maximum_ball_dy, maximum_ball_dx):
+def check_my_collision(level_up_score, level, score, maximum_ball_dx, maximum_ball_dy):
 	for ball in balls:
 		if collide(ball,my_ball):
 			my_rad= my_ball.r
@@ -130,8 +128,9 @@ def check_my_collision(level_up_score, level, score, maximum_ball_radius, maximu
 			if my_rad>ball_rad:
 				my_ball.r+=4
 				my_ball.shapesize(my_ball.r/10)
-				randomize(ball)
+				randomize(ball, maximum_ball_dx, maximum_ball_dy)
 				score+=1
+				turtle.write( "score: "+ str(score),font= ("Arial", 15, "bold") )
 
 			else:
 
@@ -156,9 +155,8 @@ def game_over():
 
 		
 
-def playgame(running, screen_width, screen_height, level, score, level_up_score):
-	turtle.title("level: "+ str(level))
-	
+def playgame(running, screen_width, screen_height, level, score, level_up_score, maximum_ball_dx, maximum_ball_dy):
+	turtle.write( "score: "+ str(score),font= ("Arial", 15, "bold") )
 	for i in range(number_of_balls):
 		new_ball= random_ball()
 		balls.append(new_ball)
@@ -171,13 +169,13 @@ def playgame(running, screen_width, screen_height, level, score, level_up_score)
 
 		for ball in balls:
 			ball.move()
-		check_all_collision()
-		running=check_my_collision(level_up_score, level, score, maximum_ball_radius, maximum_ball_dy, maximum_ball_dx)
-		level_up(level_up_score, level, score, maximum_ball_radius, maximum_ball_dy, maximum_ball_dx)
+		check_all_collision(maximum_ball_dx, maximum_ball_dy)
+		running=check_my_collision(level_up_score, level, score, maximum_ball_dx, maximum_ball_dy)
+		maximum_ball_dx, maximum_ball_dy= level_up(level_up_score, level, score, maximum_ball_radius, maximum_ball_dy, maximum_ball_dx)
 		turtle.update()
 		time.sleep(sleep)
 	game_over()
 
-playgame(running, screen_width, screen_height, level, score, level_up_score)
+playgame(running, screen_width, screen_height, level, score, level_up_score, maximum_ball_dx, maximum_ball_dy)
 
 turtle.mainloop()
