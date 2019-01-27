@@ -117,7 +117,7 @@ def level_up(level_up_score, level, score, maximum_ball_radius, maximum_ball_dy,
 		maximum_ball_dx+=1
 		level+=1
 		level_up_score+=2*level
-		turtle.write("level: "+ str(level))
+		#turtle.write("level: "+ str(level))
 
 
 #this function checks if the player's ball is colliding with an other ball
@@ -158,17 +158,19 @@ def game_over():
 
 def playgame(running, screen_width, screen_height, level, score, level_up_score):
 	turtle.title("level: "+ str(level))
+	
 	for i in range(number_of_balls):
 		new_ball= random_ball()
 		balls.append(new_ball)
 
 	while running:
+
 		if screen_width!= int(turtle.getcanvas().winfo_width()/2) or screen_height != int(turtle.getcanvas().winfo_height()/2):
 			screen_width= int(turtle.getcanvas().winfo_width()/2)
 			screen_height= int(turtle.getcanvas().winfo_height()/2)
 
 		for ball in balls:
-			ball.move(screen_width, screen_height)
+			ball.move()
 		check_all_collision()
 		running=check_my_collision(level_up_score, level, score, maximum_ball_radius, maximum_ball_dy, maximum_ball_dx)
 		level_up(level_up_score, level, score, maximum_ball_radius, maximum_ball_dy, maximum_ball_dx)
