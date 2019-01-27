@@ -29,7 +29,7 @@ screen_height= int(turtle.getcanvas().winfo_height()/2)
 global level_up_score, score, level
 level_up_score=0
 score=0
-level=0
+level=1
 
 #sets ranges for for the randomize functions
 number_of_balls=10
@@ -130,7 +130,7 @@ def check_my_collision(level_up_score, level, score, maximum_ball_dx, maximum_ba
 				my_ball.shapesize(my_ball.r/10)
 				randomize(ball, maximum_ball_dx, maximum_ball_dy)
 				score+=1
-				turtle.write( "score: "+ str(score),font= ("Arial", 15, "bold") )
+				#turtle.write( "score: "+ str(score),font= ("Arial", 15, "bold") )
 
 			else:
 
@@ -156,7 +156,7 @@ def game_over():
 		
 
 def playgame(running, screen_width, screen_height, level, score, level_up_score, maximum_ball_dx, maximum_ball_dy):
-	turtle.write( "score: "+ str(score),font= ("Arial", 15, "bold") )
+	#turtle.write( "score: "+ str(score),font= ("Arial", 15, "bold") )
 	for i in range(number_of_balls):
 		new_ball= random_ball()
 		balls.append(new_ball)
@@ -168,7 +168,7 @@ def playgame(running, screen_width, screen_height, level, score, level_up_score,
 			screen_height= int(turtle.getcanvas().winfo_height()/2)
 
 		for ball in balls:
-			ball.move()
+			ball.move(screen_width, screen_height)
 		check_all_collision(maximum_ball_dx, maximum_ball_dy)
 		running=check_my_collision(level_up_score, level, score, maximum_ball_dx, maximum_ball_dy)
 		maximum_ball_dx, maximum_ball_dy= level_up(level_up_score, level, score, maximum_ball_radius, maximum_ball_dy, maximum_ball_dx)
